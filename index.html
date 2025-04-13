@@ -1,0 +1,1500 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>曲コメントメモ（お気に入りフィルター付き）</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { font-family: sans-serif; background-color: #f2f2f2; padding: 20px; max-width: 600px; margin: auto; }
+        h1 { text-align: center; font-size: 1.5em; }
+        #filter-box { text-align: center; margin-bottom: 20px; }
+        #filter-box input[type="number"] { width: 80px; font-size: 1em; padding: 5px; }
+        #filter-box label { display: block; margin-top: 10px; }
+        .track { display: flex; align-items: center; justify-content: space-between; background-color: white;
+                 border: 1px solid #ddd; padding: 10px; margin: 8px 0; border-radius: 8px; }
+        .favorite { font-size: 1.3em; cursor: pointer; margin-right: 10px; user-select: none; }
+        .favorite.active { color: gold; }
+        label.track-label { flex: 1; font-weight: bold; font-size: 0.95em; }
+        textarea { flex: 1; height: 20px; font-size: 0.9em; resize: none; padding: 3px 6px; width: 40%; }
+        .hide-btn { cursor: pointer; color: red; margin-left: 8px; font-weight: bold; }
+        #restore-btn { display: block; text-align: center; margin: 20px auto; padding: 10px; border-radius: 8px; background: #ccc; cursor: pointer; width: fit-content; }
+    </style>
+</head>
+<body>
+    <h1>8thRC コメントメモツール</h1>
+<p style="text-align: center; font-size: 0.9em; color: #555;">
+    このツールはあなた専用の8thRCメモです。コメント・スコア・お気に入りは<br>
+    <strong>すべて自分の端末に保存</strong>され、他の人と共有されることはありません。<br>
+    非表示やお気に入りフィルターなど、自由に活用してください！
+</p>
+    <div id="filter-box">
+        <label>数字フィルター（以下）: <input type="number" id="threshold" placeholder="例: 5"></label>
+        <label><input type="checkbox" id="favOnly"> ⭐ お気に入りのみ表示</label>
+    </div>
+<div class="track" data-id="track-1">
+    <span class="favorite" data-id="fav-1">☆</span>
+    <label for="comment-1" class="track-label">I</label>
+    <textarea id="comment-1"></textarea>
+    <span class="hide-btn" data-id="hide-1">🚫</span>
+</div>
+<div class="track" data-id="track-2">
+    <span class="favorite" data-id="fav-2">☆</span>
+    <label for="comment-2" class="track-label">【】dentity</label>
+    <textarea id="comment-2"></textarea>
+    <span class="hide-btn" data-id="hide-2">🚫</span>
+</div>
+<div class="track" data-id="track-3">
+    <span class="favorite" data-id="fav-3">☆</span>
+    <label for="comment-3" class="track-label">愛は不死鳥のように</label>
+    <textarea id="comment-3"></textarea>
+    <span class="hide-btn" data-id="hide-3">🚫</span>
+</div>
+<div class="track" data-id="track-4">
+    <span class="favorite" data-id="fav-4">☆</span>
+    <label for="comment-4" class="track-label">I LOVE COSMOS</label>
+    <textarea id="comment-4"></textarea>
+    <span class="hide-btn" data-id="hide-4">🚫</span>
+</div>
+<div class="track" data-id="track-5">
+    <span class="favorite" data-id="fav-5">☆</span>
+    <label for="comment-5" class="track-label">オーソレ2</label>
+    <textarea id="comment-5"></textarea>
+    <span class="hide-btn" data-id="hide-5">🚫</span>
+</div>
+<div class="track" data-id="track-6">
+    <span class="favorite" data-id="fav-6">☆</span>
+    <label for="comment-6" class="track-label">out of focus</label>
+    <textarea id="comment-6"></textarea>
+    <span class="hide-btn" data-id="hide-6">🚫</span>
+</div>
+<div class="track" data-id="track-7">
+    <span class="favorite" data-id="fav-7">☆</span>
+    <label for="comment-7" class="track-label">アガット</label>
+    <textarea id="comment-7"></textarea>
+    <span class="hide-btn" data-id="hide-7">🚫</span>
+</div>
+<div class="track" data-id="track-8">
+    <span class="favorite" data-id="fav-8">☆</span>
+    <label for="comment-8" class="track-label">アガット2</label>
+    <textarea id="comment-8"></textarea>
+    <span class="hide-btn" data-id="hide-8">🚫</span>
+</div>
+<div class="track" data-id="track-9">
+    <span class="favorite" data-id="fav-9">☆</span>
+    <label for="comment-9" class="track-label">Against</label>
+    <textarea id="comment-9"></textarea>
+    <span class="hide-btn" data-id="hide-9">🚫</span>
+</div>
+<div class="track" data-id="track-10">
+    <span class="favorite" data-id="fav-10">☆</span>
+    <label for="comment-10" class="track-label">アストライア</label>
+    <textarea id="comment-10"></textarea>
+    <span class="hide-btn" data-id="hide-10">🚫</span>
+</div>
+<div class="track" data-id="track-11">
+    <span class="favorite" data-id="fav-11">☆</span>
+    <label for="comment-11" class="track-label">Anubis</label>
+    <textarea id="comment-11"></textarea>
+    <span class="hide-btn" data-id="hide-11">🚫</span>
+</div>
+<div class="track" data-id="track-12">
+    <span class="favorite" data-id="fav-12">☆</span>
+    <label for="comment-12" class="track-label">雨上がりの空に</label>
+    <textarea id="comment-12"></textarea>
+    <span class="hide-btn" data-id="hide-12">🚫</span>
+</div>
+<div class="track" data-id="track-13">
+    <span class="favorite" data-id="fav-13">☆</span>
+    <label for="comment-13" class="track-label">アワフェ</label>
+    <textarea id="comment-13"></textarea>
+    <span class="hide-btn" data-id="hide-13">🚫</span>
+</div>
+<div class="track" data-id="track-14">
+    <span class="favorite" data-id="fav-14">☆</span>
+    <label for="comment-14" class="track-label">アワフェ2</label>
+    <textarea id="comment-14"></textarea>
+    <span class="hide-btn" data-id="hide-14">🚫</span>
+</div>
+<div class="track" data-id="track-15">
+    <span class="favorite" data-id="fav-15">☆</span>
+    <label for="comment-15" class="track-label">EX-MASSIVE FIGHTER</label>
+    <textarea id="comment-15"></textarea>
+    <span class="hide-btn" data-id="hide-15">🚫</span>
+</div>
+<div class="track" data-id="track-16">
+    <span class="favorite" data-id="fav-16">☆</span>
+    <label for="comment-16" class="track-label">Yello head joe ADV</label>
+    <textarea id="comment-16"></textarea>
+    <span class="hide-btn" data-id="hide-16">🚫</span>
+</div>
+<div class="track" data-id="track-17">
+    <span class="favorite" data-id="fav-17">☆</span>
+    <label for="comment-17" class="track-label">Ignis dance</label>
+    <textarea id="comment-17"></textarea>
+    <span class="hide-btn" data-id="hide-17">🚫</span>
+</div>
+<div class="track" data-id="track-18">
+    <span class="favorite" data-id="fav-18">☆</span>
+    <label for="comment-18" class="track-label">1116EXT</label>
+    <textarea id="comment-18"></textarea>
+    <span class="hide-btn" data-id="hide-18">🚫</span>
+</div>
+<div class="track" data-id="track-19">
+    <span class="favorite" data-id="fav-19">☆</span>
+    <label for="comment-19" class="track-label">Insanity</label>
+    <textarea id="comment-19"></textarea>
+    <span class="hide-btn" data-id="hide-19">🚫</span>
+</div>
+<div class="track" data-id="track-20">
+    <span class="favorite" data-id="fav-20">☆</span>
+    <label for="comment-20" class="track-label">Insanity luna</label>
+    <textarea id="comment-20"></textarea>
+    <span class="hide-btn" data-id="hide-20">🚫</span>
+</div>
+<div class="track" data-id="track-21">
+    <span class="favorite" data-id="fav-21">☆</span>
+    <label for="comment-21" class="track-label">In the Ruins</label>
+    <textarea id="comment-21"></textarea>
+    <span class="hide-btn" data-id="hide-21">🚫</span>
+</div>
+<div class="track" data-id="track-22">
+    <span class="favorite" data-id="fav-22">☆</span>
+    <label for="comment-22" class="track-label">Indigo nocturne</label>
+    <textarea id="comment-22"></textarea>
+    <span class="hide-btn" data-id="hide-22">🚫</span>
+</div>
+<div class="track" data-id="track-23">
+    <span class="favorite" data-id="fav-23">☆</span>
+    <label for="comment-23" class="track-label">In your eyes</label>
+    <textarea id="comment-23"></textarea>
+    <span class="hide-btn" data-id="hide-23">🚫</span>
+</div>
+<div class="track" data-id="track-24">
+    <span class="favorite" data-id="fav-24">☆</span>
+    <label for="comment-24" class="track-label">Vertrages</label>
+    <textarea id="comment-24"></textarea>
+    <span class="hide-btn" data-id="hide-24">🚫</span>
+</div>
+<div class="track" data-id="track-25">
+    <span class="favorite" data-id="fav-25">☆</span>
+    <label for="comment-25" class="track-label">Vermillion</label>
+    <textarea id="comment-25"></textarea>
+    <span class="hide-btn" data-id="hide-25">🚫</span>
+</div>
+<div class="track" data-id="track-26">
+    <span class="favorite" data-id="fav-26">☆</span>
+    <label for="comment-26" class="track-label">Valanga</label>
+    <textarea id="comment-26"></textarea>
+    <span class="hide-btn" data-id="hide-26">🚫</span>
+</div>
+<div class="track" data-id="track-27">
+    <span class="favorite" data-id="fav-27">☆</span>
+    <label for="comment-27" class="track-label">Vallis【2】</label>
+    <textarea id="comment-27"></textarea>
+    <span class="hide-btn" data-id="hide-27">🚫</span>
+</div>
+<div class="track" data-id="track-28">
+    <span class="favorite" data-id="fav-28">☆</span>
+    <label for="comment-28" class="track-label">うぃあぴ</label>
+    <textarea id="comment-28"></textarea>
+    <span class="hide-btn" data-id="hide-28">🚫</span>
+</div>
+<div class="track" data-id="track-29">
+    <span class="favorite" data-id="fav-29">☆</span>
+    <label for="comment-29" class="track-label">うぃあぴ【2】</label>
+    <textarea id="comment-29"></textarea>
+    <span class="hide-btn" data-id="hide-29">🚫</span>
+</div>
+<div class="track" data-id="track-30">
+    <span class="favorite" data-id="fav-30">☆</span>
+    <label for="comment-30" class="track-label">モッシュピット</label>
+    <textarea id="comment-30"></textarea>
+    <span class="hide-btn" data-id="hide-30">🚫</span>
+</div>
+<div class="track" data-id="track-31">
+    <span class="favorite" data-id="fav-31">☆</span>
+    <label for="comment-31" class="track-label">ヴェルテクス</label>
+    <textarea id="comment-31"></textarea>
+    <span class="hide-btn" data-id="hide-31">🚫</span>
+</div>
+<div class="track" data-id="track-32">
+    <span class="favorite" data-id="fav-32">☆</span>
+    <label for="comment-32" class="track-label">ボラキアス</label>
+    <textarea id="comment-32"></textarea>
+    <span class="hide-btn" data-id="hide-32">🚫</span>
+</div>
+<div class="track" data-id="track-33">
+    <span class="favorite" data-id="fav-33">☆</span>
+    <label for="comment-33" class="track-label">ボラキアスギタドラ</label>
+    <textarea id="comment-33"></textarea>
+    <span class="hide-btn" data-id="hide-33">🚫</span>
+</div>
+<div class="track" data-id="track-34">
+    <span class="favorite" data-id="fav-34">☆</span>
+    <label for="comment-34" class="track-label">運命</label>
+    <textarea id="comment-34"></textarea>
+    <span class="hide-btn" data-id="hide-34">🚫</span>
+</div>
+<div class="track" data-id="track-35">
+    <span class="favorite" data-id="fav-35">☆</span>
+    <label for="comment-35" class="track-label">エアレ</label>
+    <textarea id="comment-35"></textarea>
+    <span class="hide-btn" data-id="hide-35">🚫</span>
+</div>
+<div class="track" data-id="track-36">
+    <span class="favorite" data-id="fav-36">☆</span>
+    <label for="comment-36" class="track-label">エアレ２</label>
+    <textarea id="comment-36"></textarea>
+    <span class="hide-btn" data-id="hide-36">🚫</span>
+</div>
+<div class="track" data-id="track-37">
+    <span class="favorite" data-id="fav-37">☆</span>
+    <label for="comment-37" class="track-label">リッチ</label>
+    <textarea id="comment-37"></textarea>
+    <span class="hide-btn" data-id="hide-37">🚫</span>
+</div>
+<div class="track" data-id="track-38">
+    <span class="favorite" data-id="fav-38">☆</span>
+    <label for="comment-38" class="track-label">AI</label>
+    <textarea id="comment-38"></textarea>
+    <span class="hide-btn" data-id="hide-38">🚫</span>
+</div>
+<div class="track" data-id="track-39">
+    <span class="favorite" data-id="fav-39">☆</span>
+    <label for="comment-39" class="track-label">X-ray</label>
+    <textarea id="comment-39"></textarea>
+    <span class="hide-btn" data-id="hide-39">🚫</span>
+</div>
+<div class="track" data-id="track-40">
+    <span class="favorite" data-id="fav-40">☆</span>
+    <label for="comment-40" class="track-label">ノスエバ</label>
+    <textarea id="comment-40"></textarea>
+    <span class="hide-btn" data-id="hide-40">🚫</span>
+</div>
+<div class="track" data-id="track-41">
+    <span class="favorite" data-id="fav-41">☆</span>
+    <label for="comment-41" class="track-label">Evans</label>
+    <textarea id="comment-41"></textarea>
+    <span class="hide-btn" data-id="hide-41">🚫</span>
+</div>
+<div class="track" data-id="track-42">
+    <span class="favorite" data-id="fav-42">☆</span>
+    <label for="comment-42" class="track-label">マキナ</label>
+    <textarea id="comment-42"></textarea>
+    <span class="hide-btn" data-id="hide-42">🚫</span>
+</div>
+<div class="track" data-id="track-43">
+    <span class="favorite" data-id="fav-43">☆</span>
+    <label for="comment-43" class="track-label">エレクリ</label>
+    <textarea id="comment-43"></textarea>
+    <span class="hide-btn" data-id="hide-43">🚫</span>
+</div>
+<div class="track" data-id="track-44">
+    <span class="favorite" data-id="fav-44">☆</span>
+    <label for="comment-44" class="track-label">エンカウンター</label>
+    <textarea id="comment-44"></textarea>
+    <span class="hide-btn" data-id="hide-44">🚫</span>
+</div>
+<div class="track" data-id="track-45">
+    <span class="favorite" data-id="fav-45">☆</span>
+    <label for="comment-45" class="track-label">エンドルフィン</label>
+    <textarea id="comment-45"></textarea>
+    <span class="hide-btn" data-id="hide-45">🚫</span>
+</div>
+<div class="track" data-id="track-46">
+    <span class="favorite" data-id="fav-46">☆</span>
+    <label for="comment-46" class="track-label">Endless Beats</label>
+    <textarea id="comment-46"></textarea>
+    <span class="hide-btn" data-id="hide-46">🚫</span>
+</div>
+<div class="track" data-id="track-47">
+    <span class="favorite" data-id="fav-47">☆</span>
+    <label for="comment-47" class="track-label">オバコン</label>
+    <textarea id="comment-47"></textarea>
+    <span class="hide-btn" data-id="hide-47">🚫</span>
+</div>
+<div class="track" data-id="track-48">
+    <span class="favorite" data-id="fav-48">☆</span>
+    <label for="comment-48" class="track-label">オバヒ</label>
+    <textarea id="comment-48"></textarea>
+    <span class="hide-btn" data-id="hide-48">🚫</span>
+</div>
+<div class="track" data-id="track-49">
+    <span class="favorite" data-id="fav-49">☆</span>
+    <label for="comment-49" class="track-label">おこめ</label>
+    <textarea id="comment-49"></textarea>
+    <span class="hide-btn" data-id="hide-49">🚫</span>
+</div>
+<div class="track" data-id="track-50">
+    <span class="favorite" data-id="fav-50">☆</span>
+    <label for="comment-50" class="track-label">御千手</label>
+    <textarea id="comment-50"></textarea>
+    <span class="hide-btn" data-id="hide-50">🚫</span>
+</div>
+<div class="track" data-id="track-51">
+    <span class="favorite" data-id="fav-51">☆</span>
+    <label for="comment-51" class="track-label">カーメン虹</label>
+    <textarea id="comment-51"></textarea>
+    <span class="hide-btn" data-id="hide-51">🚫</span>
+</div>
+<div class="track" data-id="track-52">
+    <span class="favorite" data-id="fav-52">☆</span>
+    <label for="comment-52" class="track-label">ガイア</label>
+    <textarea id="comment-52"></textarea>
+    <span class="hide-btn" data-id="hide-52">🚫</span>
+</div>
+<div class="track" data-id="track-53">
+    <span class="favorite" data-id="fav-53">☆</span>
+    <label for="comment-53" class="track-label">カマイタチ</label>
+    <textarea id="comment-53"></textarea>
+    <span class="hide-btn" data-id="hide-53">🚫</span>
+</div>
+<div class="track" data-id="track-54">
+    <span class="favorite" data-id="fav-54">☆</span>
+    <label for="comment-54" class="track-label">ガラクタ</label>
+    <textarea id="comment-54"></textarea>
+    <span class="hide-btn" data-id="hide-54">🚫</span>
+</div>
+<div class="track" data-id="track-55">
+    <span class="favorite" data-id="fav-55">☆</span>
+    <label for="comment-55" class="track-label">Caldwell 99</label>
+    <textarea id="comment-55"></textarea>
+    <span class="hide-btn" data-id="hide-55">🚫</span>
+</div>
+<div class="track" data-id="track-56">
+    <span class="favorite" data-id="fav-56">☆</span>
+    <label for="comment-56" class="track-label">きたさいたま</label>
+    <textarea id="comment-56"></textarea>
+    <span class="hide-btn" data-id="hide-56">🚫</span>
+</div>
+<div class="track" data-id="track-57">
+    <span class="favorite" data-id="fav-57">☆</span>
+    <label for="comment-57" class="track-label">Catch our fire</label>
+    <textarea id="comment-57"></textarea>
+    <span class="hide-btn" data-id="hide-57">🚫</span>
+</div>
+<div class="track" data-id="track-58">
+    <span class="favorite" data-id="fav-58">☆</span>
+    <label for="comment-58" class="track-label">Capitalism</label>
+    <textarea id="comment-58"></textarea>
+    <span class="hide-btn" data-id="hide-58">🚫</span>
+</div>
+<div class="track" data-id="track-59">
+    <span class="favorite" data-id="fav-59">☆</span>
+    <label for="comment-59" class="track-label">QQ</label>
+    <textarea id="comment-59"></textarea>
+    <span class="hide-btn" data-id="hide-59">🚫</span>
+</div>
+<div class="track" data-id="track-60">
+    <span class="favorite" data-id="fav-60">☆</span>
+    <label for="comment-60" class="track-label">狂水一華</label>
+    <textarea id="comment-60"></textarea>
+    <span class="hide-btn" data-id="hide-60">🚫</span>
+</div>
+<div class="track" data-id="track-61">
+    <span class="favorite" data-id="fav-61">☆</span>
+    <label for="comment-61" class="track-label">ブランシェADV</label>
+    <textarea id="comment-61"></textarea>
+    <span class="hide-btn" data-id="hide-61">🚫</span>
+</div>
+<div class="track" data-id="track-62">
+    <span class="favorite" data-id="fav-62">☆</span>
+    <label for="comment-62" class="track-label">ブランシェEXT</label>
+    <textarea id="comment-62"></textarea>
+    <span class="hide-btn" data-id="hide-62">🚫</span>
+</div>
+<div class="track" data-id="track-63">
+    <span class="favorite" data-id="fav-63">☆</span>
+    <label for="comment-63" class="track-label">glacia</label>
+    <textarea id="comment-63"></textarea>
+    <span class="hide-btn" data-id="hide-63">🚫</span>
+</div>
+<div class="track" data-id="track-64">
+    <span class="favorite" data-id="fav-64">☆</span>
+    <label for="comment-64" class="track-label">glacia【2】</label>
+    <textarea id="comment-64"></textarea>
+    <span class="hide-btn" data-id="hide-64">🚫</span>
+</div>
+<div class="track" data-id="track-65">
+    <span class="favorite" data-id="fav-65">☆</span>
+    <label for="comment-65" class="track-label">クラトラ</label>
+    <textarea id="comment-65"></textarea>
+    <span class="hide-btn" data-id="hide-65">🚫</span>
+</div>
+<div class="track" data-id="track-66">
+    <span class="favorite" data-id="fav-66">☆</span>
+    <label for="comment-66" class="track-label">クラポADV</label>
+    <textarea id="comment-66"></textarea>
+    <span class="hide-btn" data-id="hide-66">🚫</span>
+</div>
+<div class="track" data-id="track-67">
+    <span class="favorite" data-id="fav-67">☆</span>
+    <label for="comment-67" class="track-label">クラポEXT</label>
+    <textarea id="comment-67"></textarea>
+    <span class="hide-btn" data-id="hide-67">🚫</span>
+</div>
+<div class="track" data-id="track-68">
+    <span class="favorite" data-id="fav-68">☆</span>
+    <label for="comment-68" class="track-label">Grand chariot</label>
+    <textarea id="comment-68"></textarea>
+    <span class="hide-btn" data-id="hide-68">🚫</span>
+</div>
+<div class="track" data-id="track-69">
+    <span class="favorite" data-id="fav-69">☆</span>
+    <label for="comment-69" class="track-label">GFS</label>
+    <textarea id="comment-69"></textarea>
+    <span class="hide-btn" data-id="hide-69">🚫</span>
+</div>
+<div class="track" data-id="track-70">
+    <span class="favorite" data-id="fav-70">☆</span>
+    <label for="comment-70" class="track-label">クレシャ</label>
+    <textarea id="comment-70"></textarea>
+    <span class="hide-btn" data-id="hide-70">🚫</span>
+</div>
+<div class="track" data-id="track-71">
+    <span class="favorite" data-id="fav-71">☆</span>
+    <label for="comment-71" class="track-label">クレパト</label>
+    <textarea id="comment-71"></textarea>
+    <span class="hide-btn" data-id="hide-71">🚫</span>
+</div>
+<div class="track" data-id="track-72">
+    <span class="favorite" data-id="fav-72">☆</span>
+    <label for="comment-72" class="track-label">Globe gitter</label>
+    <textarea id="comment-72"></textarea>
+    <span class="hide-btn" data-id="hide-72">🚫</span>
+</div>
+<div class="track" data-id="track-73">
+    <span class="favorite" data-id="fav-73">☆</span>
+    <label for="comment-73" class="track-label">croiX</label>
+    <textarea id="comment-73"></textarea>
+    <span class="hide-btn" data-id="hide-73">🚫</span>
+</div>
+<div class="track" data-id="track-74">
+    <span class="favorite" data-id="fav-74">☆</span>
+    <label for="comment-74" class="track-label">クロワッサン</label>
+    <textarea id="comment-74"></textarea>
+    <span class="hide-btn" data-id="hide-74">🚫</span>
+</div>
+<div class="track" data-id="track-75">
+    <span class="favorite" data-id="fav-75">☆</span>
+    <label for="comment-75" class="track-label">檄</label>
+    <textarea id="comment-75"></textarea>
+    <span class="hide-btn" data-id="hide-75">🚫</span>
+</div>
+<div class="track" data-id="track-76">
+    <span class="favorite" data-id="fav-76">☆</span>
+    <label for="comment-76" class="track-label">ゲントウキ</label>
+    <textarea id="comment-76"></textarea>
+    <span class="hide-btn" data-id="hide-76">🚫</span>
+</div>
+<div class="track" data-id="track-77">
+    <span class="favorite" data-id="fav-77">☆</span>
+    <label for="comment-77" class="track-label">Ghost Clock</label>
+    <textarea id="comment-77"></textarea>
+    <span class="hide-btn" data-id="hide-77">🚫</span>
+</div>
+<div class="track" data-id="track-78">
+    <span class="favorite" data-id="fav-78">☆</span>
+    <label for="comment-78" class="track-label">Go beyond</label>
+    <textarea id="comment-78"></textarea>
+    <span class="hide-btn" data-id="hide-78">🚫</span>
+</div>
+<div class="track" data-id="track-79">
+    <span class="favorite" data-id="fav-79">☆</span>
+    <label for="comment-79" class="track-label">コズミック</label>
+    <textarea id="comment-79"></textarea>
+    <span class="hide-btn" data-id="hide-79">🚫</span>
+</div>
+<div class="track" data-id="track-80">
+    <span class="favorite" data-id="fav-80">☆</span>
+    <label for="comment-80" class="track-label">コズミン</label>
+    <textarea id="comment-80"></textarea>
+    <span class="hide-btn" data-id="hide-80">🚫</span>
+</div>
+<div class="track" data-id="track-81">
+    <span class="favorite" data-id="fav-81">☆</span>
+    <label for="comment-81" class="track-label">ゴモア</label>
+    <textarea id="comment-81"></textarea>
+    <span class="hide-btn" data-id="hide-81">🚫</span>
+</div>
+<div class="track" data-id="track-82">
+    <span class="favorite" data-id="fav-82">☆</span>
+    <label for="comment-82" class="track-label">Comet popcorn</label>
+    <textarea id="comment-82"></textarea>
+    <span class="hide-btn" data-id="hide-82">🚫</span>
+</div>
+<div class="track" data-id="track-83">
+    <span class="favorite" data-id="fav-83">☆</span>
+    <label for="comment-83" class="track-label">コンコン</label>
+    <textarea id="comment-83"></textarea>
+    <span class="hide-btn" data-id="hide-83">🚫</span>
+</div>
+<div class="track" data-id="track-84">
+    <span class="favorite" data-id="fav-84">☆</span>
+    <label for="comment-84" class="track-label">コンフィADV</label>
+    <textarea id="comment-84"></textarea>
+    <span class="hide-btn" data-id="hide-84">🚫</span>
+</div>
+<div class="track" data-id="track-85">
+    <span class="favorite" data-id="fav-85">☆</span>
+    <label for="comment-85" class="track-label">コンフィEXT</label>
+    <textarea id="comment-85"></textarea>
+    <span class="hide-btn" data-id="hide-85">🚫</span>
+</div>
+<div class="track" data-id="track-86">
+    <span class="favorite" data-id="fav-86">☆</span>
+    <label for="comment-86" class="track-label">Sacrifice</label>
+    <textarea id="comment-86"></textarea>
+    <span class="hide-btn" data-id="hide-86">🚫</span>
+</div>
+<div class="track" data-id="track-87">
+    <span class="favorite" data-id="fav-87">☆</span>
+    <label for="comment-87" class="track-label">サハラ</label>
+    <textarea id="comment-87"></textarea>
+    <span class="hide-btn" data-id="hide-87">🚫</span>
+</div>
+<div class="track" data-id="track-88">
+    <span class="favorite" data-id="fav-88">☆</span>
+    <label for="comment-88" class="track-label">さよならヘヴン２</label>
+    <textarea id="comment-88"></textarea>
+    <span class="hide-btn" data-id="hide-88">🚫</span>
+</div>
+<div class="track" data-id="track-89">
+    <span class="favorite" data-id="fav-89">☆</span>
+    <label for="comment-89" class="track-label">FIREFACE</label>
+    <textarea id="comment-89"></textarea>
+    <span class="hide-btn" data-id="hide-89">🚫</span>
+</div>
+<div class="track" data-id="track-90">
+    <span class="favorite" data-id="fav-90">☆</span>
+    <label for="comment-90" class="track-label">オーメン</label>
+    <textarea id="comment-90"></textarea>
+    <span class="hide-btn" data-id="hide-90">🚫</span>
+</div>
+<div class="track" data-id="track-91">
+    <span class="favorite" data-id="fav-91">☆</span>
+    <label for="comment-91" class="track-label">此岸の戯事</label>
+    <textarea id="comment-91"></textarea>
+    <span class="hide-btn" data-id="hide-91">🚫</span>
+</div>
+<div class="track" data-id="track-92">
+    <span class="favorite" data-id="fav-92">☆</span>
+    <label for="comment-92" class="track-label">灼熱</label>
+    <textarea id="comment-92"></textarea>
+    <span class="hide-btn" data-id="hide-92">🚫</span>
+</div>
+<div class="track" data-id="track-93">
+    <span class="favorite" data-id="fav-93">☆</span>
+    <label for="comment-93" class="track-label">Jazz</label>
+    <textarea id="comment-93"></textarea>
+    <span class="hide-btn" data-id="hide-93">🚫</span>
+</div>
+<div class="track" data-id="track-94">
+    <span class="favorite" data-id="fav-94">☆</span>
+    <label for="comment-94" class="track-label">ムラクモ</label>
+    <textarea id="comment-94"></textarea>
+    <span class="hide-btn" data-id="hide-94">🚫</span>
+</div>
+<div class="track" data-id="track-95">
+    <span class="favorite" data-id="fav-95">☆</span>
+    <label for="comment-95" class="track-label">ジョマンダ</label>
+    <textarea id="comment-95"></textarea>
+    <span class="hide-btn" data-id="hide-95">🚫</span>
+</div>
+<div class="track" data-id="track-96">
+    <span class="favorite" data-id="fav-96">☆</span>
+    <label for="comment-96" class="track-label">singularity</label>
+    <textarea id="comment-96"></textarea>
+    <span class="hide-btn" data-id="hide-96">🚫</span>
+</div>
+<div class="track" data-id="track-97">
+    <span class="favorite" data-id="fav-97">☆</span>
+    <label for="comment-97" class="track-label">ゲロゲーロ</label>
+    <textarea id="comment-97"></textarea>
+    <span class="hide-btn" data-id="hide-97">🚫</span>
+</div>
+<div class="track" data-id="track-98">
+    <span class="favorite" data-id="fav-98">☆</span>
+    <label for="comment-98" class="track-label">スーパー銭湯ババンバーン</label>
+    <textarea id="comment-98"></textarea>
+    <span class="hide-btn" data-id="hide-98">🚫</span>
+</div>
+<div class="track" data-id="track-99">
+    <span class="favorite" data-id="fav-99">☆</span>
+    <label for="comment-99" class="track-label">ファウナ２</label>
+    <textarea id="comment-99"></textarea>
+    <span class="hide-btn" data-id="hide-99">🚫</span>
+</div>
+<div class="track" data-id="track-100">
+    <span class="favorite" data-id="fav-100">☆</span>
+    <label for="comment-100" class="track-label">スカイハイ黄色</label>
+    <textarea id="comment-100"></textarea>
+    <span class="hide-btn" data-id="hide-100">🚫</span>
+</div>
+<div class="track" data-id="track-101">
+    <span class="favorite" data-id="fav-101">☆</span>
+    <label for="comment-101" class="track-label">スカイハイ赤</label>
+    <textarea id="comment-101"></textarea>
+    <span class="hide-btn" data-id="hide-101">🚫</span>
+</div>
+<div class="track" data-id="track-102">
+    <span class="favorite" data-id="fav-102">☆</span>
+    <label for="comment-102" class="track-label">ハリネズミ</label>
+    <textarea id="comment-102"></textarea>
+    <span class="hide-btn" data-id="hide-102">🚫</span>
+</div>
+<div class="track" data-id="track-103">
+    <span class="favorite" data-id="fav-103">☆</span>
+    <label for="comment-103" class="track-label">スタンド</label>
+    <textarea id="comment-103"></textarea>
+    <span class="hide-btn" data-id="hide-103">🚫</span>
+</div>
+<div class="track" data-id="track-104">
+    <span class="favorite" data-id="fav-104">☆</span>
+    <label for="comment-104" class="track-label">ステラ</label>
+    <textarea id="comment-104"></textarea>
+    <span class="hide-btn" data-id="hide-104">🚫</span>
+</div>
+<div class="track" data-id="track-105">
+    <span class="favorite" data-id="fav-105">☆</span>
+    <label for="comment-105" class="track-label">ストレイ</label>
+    <textarea id="comment-105"></textarea>
+    <span class="hide-btn" data-id="hide-105">🚫</span>
+</div>
+<div class="track" data-id="track-106">
+    <span class="favorite" data-id="fav-106">☆</span>
+    <label for="comment-106" class="track-label">スノーファルコン</label>
+    <textarea id="comment-106"></textarea>
+    <span class="hide-btn" data-id="hide-106">🚫</span>
+</div>
+<div class="track" data-id="track-107">
+    <span class="favorite" data-id="fav-107">☆</span>
+    <label for="comment-107" class="track-label">スノーホワイト</label>
+    <textarea id="comment-107"></textarea>
+    <span class="hide-btn" data-id="hide-107">🚫</span>
+</div>
+<div class="track" data-id="track-108">
+    <span class="favorite" data-id="fav-108">☆</span>
+    <label for="comment-108" class="track-label">spirit</label>
+    <textarea id="comment-108"></textarea>
+    <span class="hide-btn" data-id="hide-108">🚫</span>
+</div>
+<div class="track" data-id="track-109">
+    <span class="favorite" data-id="fav-109">☆</span>
+    <label for="comment-109" class="track-label">スムーチ</label>
+    <textarea id="comment-109"></textarea>
+    <span class="hide-btn" data-id="hide-109">🚫</span>
+</div>
+<div class="track" data-id="track-110">
+    <span class="favorite" data-id="fav-110">☆</span>
+    <label for="comment-110" class="track-label">凱歌</label>
+    <textarea id="comment-110"></textarea>
+    <span class="hide-btn" data-id="hide-110">🚫</span>
+</div>
+<div class="track" data-id="track-111">
+    <span class="favorite" data-id="fav-111">☆</span>
+    <label for="comment-111" class="track-label">ゼノビア</label>
+    <textarea id="comment-111"></textarea>
+    <span class="hide-btn" data-id="hide-111">🚫</span>
+</div>
+<div class="track" data-id="track-112">
+    <span class="favorite" data-id="fav-112">☆</span>
+    <label for="comment-112" class="track-label">千年の狸２</label>
+    <textarea id="comment-112"></textarea>
+    <span class="hide-btn" data-id="hide-112">🚫</span>
+</div>
+<div class="track" data-id="track-113">
+    <span class="favorite" data-id="fav-113">☆</span>
+    <label for="comment-113" class="track-label">即身成仏</label>
+    <textarea id="comment-113"></textarea>
+    <span class="hide-btn" data-id="hide-113">🚫</span>
+</div>
+<div class="track" data-id="track-114">
+    <span class="favorite" data-id="fav-114">☆</span>
+    <label for="comment-114" class="track-label">ソラ２</label>
+    <textarea id="comment-114"></textarea>
+    <span class="hide-btn" data-id="hide-114">🚫</span>
+</div>
+<div class="track" data-id="track-115">
+    <span class="favorite" data-id="fav-115">☆</span>
+    <label for="comment-115" class="track-label">Diastro</label>
+    <textarea id="comment-115"></textarea>
+    <span class="hide-btn" data-id="hide-115">🚫</span>
+</div>
+<div class="track" data-id="track-116">
+    <span class="favorite" data-id="fav-116">☆</span>
+    <label for="comment-116" class="track-label">Dynasty</label>
+    <textarea id="comment-116"></textarea>
+    <span class="hide-btn" data-id="hide-116">🚫</span>
+</div>
+<div class="track" data-id="track-117">
+    <span class="favorite" data-id="fav-117">☆</span>
+    <label for="comment-117" class="track-label">time lapse</label>
+    <textarea id="comment-117"></textarea>
+    <span class="hide-btn" data-id="hide-117">🚫</span>
+</div>
+<div class="track" data-id="track-118">
+    <span class="favorite" data-id="fav-118">☆</span>
+    <label for="comment-118" class="track-label">ダイクロ赤</label>
+    <textarea id="comment-118"></textarea>
+    <span class="hide-btn" data-id="hide-118">🚫</span>
+</div>
+<div class="track" data-id="track-119">
+    <span class="favorite" data-id="fav-119">☆</span>
+    <label for="comment-119" class="track-label">タナトスADV</label>
+    <textarea id="comment-119"></textarea>
+    <span class="hide-btn" data-id="hide-119">🚫</span>
+</div>
+<div class="track" data-id="track-120">
+    <span class="favorite" data-id="fav-120">☆</span>
+    <label for="comment-120" class="track-label">タナトスEXT</label>
+    <textarea id="comment-120"></textarea>
+    <span class="hide-btn" data-id="hide-120">🚫</span>
+</div>
+<div class="track" data-id="track-121">
+    <span class="favorite" data-id="fav-121">☆</span>
+    <label for="comment-121" class="track-label">祝祭</label>
+    <textarea id="comment-121"></textarea>
+    <span class="hide-btn" data-id="hide-121">🚫</span>
+</div>
+<div class="track" data-id="track-122">
+    <span class="favorite" data-id="fav-122">☆</span>
+    <label for="comment-122" class="track-label">ダブイン</label>
+    <textarea id="comment-122"></textarea>
+    <span class="hide-btn" data-id="hide-122">🚫</span>
+</div>
+<div class="track" data-id="track-123">
+    <span class="favorite" data-id="fav-123">☆</span>
+    <label for="comment-123" class="track-label">ダンスウィズ</label>
+    <textarea id="comment-123"></textarea>
+    <span class="hide-btn" data-id="hide-123">🚫</span>
+</div>
+<div class="track" data-id="track-124">
+    <span class="favorite" data-id="fav-124">☆</span>
+    <label for="comment-124" class="track-label">チェルノ</label>
+    <textarea id="comment-124"></textarea>
+    <span class="hide-btn" data-id="hide-124">🚫</span>
+</div>
+<div class="track" data-id="track-125">
+    <span class="favorite" data-id="fav-125">☆</span>
+    <label for="comment-125" class="track-label">ちくパリミ</label>
+    <textarea id="comment-125"></textarea>
+    <span class="hide-btn" data-id="hide-125">🚫</span>
+</div>
+<div class="track" data-id="track-126">
+    <span class="favorite" data-id="fav-126">☆</span>
+    <label for="comment-126" class="track-label">チャプレ２</label>
+    <textarea id="comment-126"></textarea>
+    <span class="hide-btn" data-id="hide-126">🚫</span>
+</div>
+<div class="track" data-id="track-127">
+    <span class="favorite" data-id="fav-127">☆</span>
+    <label for="comment-127" class="track-label">ツァーリ</label>
+    <textarea id="comment-127"></textarea>
+    <span class="hide-btn" data-id="hide-127">🚫</span>
+</div>
+<div class="track" data-id="track-128">
+    <span class="favorite" data-id="fav-128">☆</span>
+    <label for="comment-128" class="track-label">DIAVOLO</label>
+    <textarea id="comment-128"></textarea>
+    <span class="hide-btn" data-id="hide-128">🚫</span>
+</div>
+<div class="track" data-id="track-129">
+    <span class="favorite" data-id="fav-129">☆</span>
+    <label for="comment-129" class="track-label">December in Strasbourg</label>
+    <textarea id="comment-129"></textarea>
+    <span class="hide-btn" data-id="hide-129">🚫</span>
+</div>
+<div class="track" data-id="track-130">
+    <span class="favorite" data-id="fav-130">☆</span>
+    <label for="comment-130" class="track-label">Devil's Rule</label>
+    <textarea id="comment-130"></textarea>
+    <span class="hide-btn" data-id="hide-130">🚫</span>
+</div>
+<div class="track" data-id="track-131">
+    <span class="favorite" data-id="fav-131">☆</span>
+    <label for="comment-131" class="track-label">Duality</label>
+    <textarea id="comment-131"></textarea>
+    <span class="hide-btn" data-id="hide-131">🚫</span>
+</div>
+<div class="track" data-id="track-132">
+    <span class="favorite" data-id="fav-132">☆</span>
+    <label for="comment-132" class="track-label">天空の華</label>
+    <textarea id="comment-132"></textarea>
+    <span class="hide-btn" data-id="hide-132">🚫</span>
+</div>
+<div class="track" data-id="track-133">
+    <span class="favorite" data-id="fav-133">☆</span>
+    <label for="comment-133" class="track-label">24/7 popperz</label>
+    <textarea id="comment-133"></textarea>
+    <span class="hide-btn" data-id="hide-133">🚫</span>
+</div>
+<div class="track" data-id="track-134">
+    <span class="favorite" data-id="fav-134">☆</span>
+    <label for="comment-134" class="track-label">TLS2</label>
+    <textarea id="comment-134"></textarea>
+    <span class="hide-btn" data-id="hide-134">🚫</span>
+</div>
+<div class="track" data-id="track-135">
+    <span class="favorite" data-id="fav-135">☆</span>
+    <label for="comment-135" class="track-label">True blue２</label>
+    <textarea id="comment-135"></textarea>
+    <span class="hide-btn" data-id="hide-135">🚫</span>
+</div>
+<div class="track" data-id="track-136">
+    <span class="favorite" data-id="fav-136">☆</span>
+    <label for="comment-136" class="track-label">ドーパミン</label>
+    <textarea id="comment-136"></textarea>
+    <span class="hide-btn" data-id="hide-136">🚫</span>
+</div>
+<div class="track" data-id="track-137">
+    <span class="favorite" data-id="fav-137">☆</span>
+    <label for="comment-137" class="track-label">トール</label>
+    <textarea id="comment-137"></textarea>
+    <span class="hide-btn" data-id="hide-137">🚫</span>
+</div>
+<div class="track" data-id="track-138">
+    <span class="favorite" data-id="fav-138">☆</span>
+    <label for="comment-138" class="track-label">トリカゴ２</label>
+    <textarea id="comment-138"></textarea>
+    <span class="hide-btn" data-id="hide-138">🚫</span>
+</div>
+<div class="track" data-id="track-139">
+    <span class="favorite" data-id="fav-139">☆</span>
+    <label for="comment-139" class="track-label">Triple counter</label>
+    <textarea id="comment-139"></textarea>
+    <span class="hide-btn" data-id="hide-139">🚫</span>
+</div>
+<div class="track" data-id="track-140">
+    <span class="favorite" data-id="fav-140">☆</span>
+    <label for="comment-140" class="track-label">Trill auf G</label>
+    <textarea id="comment-140"></textarea>
+    <span class="hide-btn" data-id="hide-140">🚫</span>
+</div>
+<div class="track" data-id="track-141">
+    <span class="favorite" data-id="fav-141">☆</span>
+    <label for="comment-141" class="track-label">トルコ</label>
+    <textarea id="comment-141"></textarea>
+    <span class="hide-btn" data-id="hide-141">🚫</span>
+</div>
+<div class="track" data-id="track-142">
+    <span class="favorite" data-id="fav-142">☆</span>
+    <label for="comment-142" class="track-label">nightbird lost wing</label>
+    <textarea id="comment-142"></textarea>
+    <span class="hide-btn" data-id="hide-142">🚫</span>
+</div>
+<div class="track" data-id="track-143">
+    <span class="favorite" data-id="fav-143">☆</span>
+    <label for="comment-143" class="track-label">IX</label>
+    <textarea id="comment-143"></textarea>
+    <span class="hide-btn" data-id="hide-143">🚫</span>
+</div>
+<div class="track" data-id="track-144">
+    <span class="favorite" data-id="fav-144">☆</span>
+    <label for="comment-144" class="track-label">niflheimr</label>
+    <textarea id="comment-144"></textarea>
+    <span class="hide-btn" data-id="hide-144">🚫</span>
+</div>
+<div class="track" data-id="track-145">
+    <span class="favorite" data-id="fav-145">☆</span>
+    <label for="comment-145" class="track-label">Newyork</label>
+    <textarea id="comment-145"></textarea>
+    <span class="hide-btn" data-id="hide-145">🚫</span>
+</div>
+<div class="track" data-id="track-146">
+    <span class="favorite" data-id="fav-146">☆</span>
+    <label for="comment-146" class="track-label">nature</label>
+    <textarea id="comment-146"></textarea>
+    <span class="hide-btn" data-id="hide-146">🚫</span>
+</div>
+<div class="track" data-id="track-147">
+    <span class="favorite" data-id="fav-147">☆</span>
+    <label for="comment-147" class="track-label">Necroxis girl</label>
+    <textarea id="comment-147"></textarea>
+    <span class="hide-btn" data-id="hide-147">🚫</span>
+</div>
+<div class="track" data-id="track-148">
+    <span class="favorite" data-id="fav-148">☆</span>
+    <label for="comment-148" class="track-label">ネリｗ</label>
+    <textarea id="comment-148"></textarea>
+    <span class="hide-btn" data-id="hide-148">🚫</span>
+</div>
+<div class="track" data-id="track-149">
+    <span class="favorite" data-id="fav-149">☆</span>
+    <label for="comment-149" class="track-label">ネバシ</label>
+    <textarea id="comment-149"></textarea>
+    <span class="hide-btn" data-id="hide-149">🚫</span>
+</div>
+<div class="track" data-id="track-150">
+    <span class="favorite" data-id="fav-150">☆</span>
+    <label for="comment-150" class="track-label">ネバールック</label>
+    <textarea id="comment-150"></textarea>
+    <span class="hide-btn" data-id="hide-150">🚫</span>
+</div>
+<div class="track" data-id="track-151">
+    <span class="favorite" data-id="fav-151">☆</span>
+    <label for="comment-151" class="track-label">neu</label>
+    <textarea id="comment-151"></textarea>
+    <span class="hide-btn" data-id="hide-151">🚫</span>
+</div>
+<div class="track" data-id="track-152">
+    <span class="favorite" data-id="fav-152">☆</span>
+    <label for="comment-152" class="track-label">Northern</label>
+    <textarea id="comment-152"></textarea>
+    <span class="hide-btn" data-id="hide-152">🚫</span>
+</div>
+<div class="track" data-id="track-153">
+    <span class="favorite" data-id="fav-153">☆</span>
+    <label for="comment-153" class="track-label">パピポペピプペパ</label>
+    <textarea id="comment-153"></textarea>
+    <span class="hide-btn" data-id="hide-153">🚫</span>
+</div>
+<div class="track" data-id="track-154">
+    <span class="favorite" data-id="fav-154">☆</span>
+    <label for="comment-154" class="track-label">灰儘</label>
+    <textarea id="comment-154"></textarea>
+    <span class="hide-btn" data-id="hide-154">🚫</span>
+</div>
+<div class="track" data-id="track-155">
+    <span class="favorite" data-id="fav-155">☆</span>
+    <label for="comment-155" class="track-label">Beastie</label>
+    <textarea id="comment-155"></textarea>
+    <span class="hide-btn" data-id="hide-155">🚫</span>
+</div>
+<div class="track" data-id="track-156">
+    <span class="favorite" data-id="fav-156">☆</span>
+    <label for="comment-156" class="track-label">Beat-NEW WORLD</label>
+    <textarea id="comment-156"></textarea>
+    <span class="hide-btn" data-id="hide-156">🚫</span>
+</div>
+<div class="track" data-id="track-157">
+    <span class="favorite" data-id="fav-157">☆</span>
+    <label for="comment-157" class="track-label">BEEF</label>
+    <textarea id="comment-157"></textarea>
+    <span class="hide-btn" data-id="hide-157">🚫</span>
+</div>
+<div class="track" data-id="track-158">
+    <span class="favorite" data-id="fav-158">☆</span>
+    <label for="comment-158" class="track-label">Hero Revealed</label>
+    <textarea id="comment-158"></textarea>
+    <span class="hide-btn" data-id="hide-158">🚫</span>
+</div>
+<div class="track" data-id="track-159">
+    <span class="favorite" data-id="fav-159">☆</span>
+    <label for="comment-159" class="track-label">Victory</label>
+    <textarea id="comment-159"></textarea>
+    <span class="hide-btn" data-id="hide-159">🚫</span>
+</div>
+<div class="track" data-id="track-160">
+    <span class="favorite" data-id="fav-160">☆</span>
+    <label for="comment-160" class="track-label">puberty</label>
+    <textarea id="comment-160"></textarea>
+    <span class="hide-btn" data-id="hide-160">🚫</span>
+</div>
+<div class="track" data-id="track-161">
+    <span class="favorite" data-id="fav-161">☆</span>
+    <label for="comment-161" class="track-label">Beyond the blue</label>
+    <textarea id="comment-161"></textarea>
+    <span class="hide-btn" data-id="hide-161">🚫</span>
+</div>
+<div class="track" data-id="track-162">
+    <span class="favorite" data-id="fav-162">☆</span>
+    <label for="comment-162" class="track-label">532</label>
+    <textarea id="comment-162"></textarea>
+    <span class="hide-btn" data-id="hide-162">🚫</span>
+</div>
+<div class="track" data-id="track-163">
+    <span class="favorite" data-id="fav-163">☆</span>
+    <label for="comment-163" class="track-label">V</label>
+    <textarea id="comment-163"></textarea>
+    <span class="hide-btn" data-id="hide-163">🚫</span>
+</div>
+<div class="track" data-id="track-164">
+    <span class="favorite" data-id="fav-164">☆</span>
+    <label for="comment-164" class="track-label">FUJIN</label>
+    <textarea id="comment-164"></textarea>
+    <span class="hide-btn" data-id="hide-164">🚫</span>
+</div>
+<div class="track" data-id="track-165">
+    <span class="favorite" data-id="fav-165">☆</span>
+    <label for="comment-165" class="track-label">Boomy</label>
+    <textarea id="comment-165"></textarea>
+    <span class="hide-btn" data-id="hide-165">🚫</span>
+</div>
+<div class="track" data-id="track-166">
+    <span class="favorite" data-id="fav-166">☆</span>
+    <label for="comment-166" class="track-label">405</label>
+    <textarea id="comment-166"></textarea>
+    <span class="hide-btn" data-id="hide-166">🚫</span>
+</div>
+<div class="track" data-id="track-167">
+    <span class="favorite" data-id="fav-167">☆</span>
+    <label for="comment-167" class="track-label">4x4</label>
+    <textarea id="comment-167"></textarea>
+    <span class="hide-btn" data-id="hide-167">🚫</span>
+</div>
+<div class="track" data-id="track-168">
+    <span class="favorite" data-id="fav-168">☆</span>
+    <label for="comment-168" class="track-label">fallen leaves</label>
+    <textarea id="comment-168"></textarea>
+    <span class="hide-btn" data-id="hide-168">🚫</span>
+</div>
+<div class="track" data-id="track-169">
+    <span class="favorite" data-id="fav-169">☆</span>
+    <label for="comment-169" class="track-label">Prowler</label>
+    <textarea id="comment-169"></textarea>
+    <span class="hide-btn" data-id="hide-169">🚫</span>
+</div>
+<div class="track" data-id="track-170">
+    <span class="favorite" data-id="fav-170">☆</span>
+    <label for="comment-170" class="track-label">Brown hawk</label>
+    <textarea id="comment-170"></textarea>
+    <span class="hide-btn" data-id="hide-170">🚫</span>
+</div>
+<div class="track" data-id="track-171">
+    <span class="favorite" data-id="fav-171">☆</span>
+    <label for="comment-171" class="track-label">黒白</label>
+    <textarea id="comment-171"></textarea>
+    <span class="hide-btn" data-id="hide-171">🚫</span>
+</div>
+<div class="track" data-id="track-172">
+    <span class="favorite" data-id="fav-172">☆</span>
+    <label for="comment-172" class="track-label">フラワー</label>
+    <textarea id="comment-172"></textarea>
+    <span class="hide-btn" data-id="hide-172">🚫</span>
+</div>
+<div class="track" data-id="track-173">
+    <span class="favorite" data-id="fav-173">☆</span>
+    <label for="comment-173" class="track-label">フラワーノスタルジア</label>
+    <textarea id="comment-173"></textarea>
+    <span class="hide-btn" data-id="hide-173">🚫</span>
+</div>
+<div class="track" data-id="track-174">
+    <span class="favorite" data-id="fav-174">☆</span>
+    <label for="comment-174" class="track-label">freaky</label>
+    <textarea id="comment-174"></textarea>
+    <span class="hide-btn" data-id="hide-174">🚫</span>
+</div>
+<div class="track" data-id="track-175">
+    <span class="favorite" data-id="fav-175">☆</span>
+    <label for="comment-175" class="track-label">ブルスト</label>
+    <textarea id="comment-175"></textarea>
+    <span class="hide-btn" data-id="hide-175">🚫</span>
+</div>
+<div class="track" data-id="track-176">
+    <span class="favorite" data-id="fav-176">☆</span>
+    <label for="comment-176" class="track-label">proof</label>
+    <textarea id="comment-176"></textarea>
+    <span class="hide-btn" data-id="hide-176">🚫</span>
+</div>
+<div class="track" data-id="track-177">
+    <span class="favorite" data-id="fav-177">☆</span>
+    <label for="comment-177" class="track-label">proof【2】</label>
+    <textarea id="comment-177"></textarea>
+    <span class="hide-btn" data-id="hide-177">🚫</span>
+</div>
+<div class="track" data-id="track-178">
+    <span class="favorite" data-id="fav-178">☆</span>
+    <label for="comment-178" class="track-label">prey</label>
+    <textarea id="comment-178"></textarea>
+    <span class="hide-btn" data-id="hide-178">🚫</span>
+</div>
+<div class="track" data-id="track-179">
+    <span class="favorite" data-id="fav-179">☆</span>
+    <label for="comment-179" class="track-label">pray nightly</label>
+    <textarea id="comment-179"></textarea>
+    <span class="hide-btn" data-id="hide-179">🚫</span>
+</div>
+<div class="track" data-id="track-180">
+    <span class="favorite" data-id="fav-180">☆</span>
+    <label for="comment-180" class="track-label">prayer</label>
+    <textarea id="comment-180"></textarea>
+    <span class="hide-btn" data-id="hide-180">🚫</span>
+</div>
+<div class="track" data-id="track-181">
+    <span class="favorite" data-id="fav-181">☆</span>
+    <label for="comment-181" class="track-label">チアガール</label>
+    <textarea id="comment-181"></textarea>
+    <span class="hide-btn" data-id="hide-181">🚫</span>
+</div>
+<div class="track" data-id="track-182">
+    <span class="favorite" data-id="fav-182">☆</span>
+    <label for="comment-182" class="track-label">フロインメドレー</label>
+    <textarea id="comment-182"></textarea>
+    <span class="hide-btn" data-id="hide-182">🚫</span>
+</div>
+<div class="track" data-id="track-183">
+    <span class="favorite" data-id="fav-183">☆</span>
+    <label for="comment-183" class="track-label">flooing eternity</label>
+    <textarea id="comment-183"></textarea>
+    <span class="hide-btn" data-id="hide-183">🚫</span>
+</div>
+<div class="track" data-id="track-184">
+    <span class="favorite" data-id="fav-184">☆</span>
+    <label for="comment-184" class="track-label">pegasus</label>
+    <textarea id="comment-184"></textarea>
+    <span class="hide-btn" data-id="hide-184">🚫</span>
+</div>
+<div class="track" data-id="track-185">
+    <span class="favorite" data-id="fav-185">☆</span>
+    <label for="comment-185" class="track-label">Hexer</label>
+    <textarea id="comment-185"></textarea>
+    <span class="hide-btn" data-id="hide-185">🚫</span>
+</div>
+<div class="track" data-id="track-186">
+    <span class="favorite" data-id="fav-186">☆</span>
+    <label for="comment-186" class="track-label">pedigree</label>
+    <textarea id="comment-186"></textarea>
+    <span class="hide-btn" data-id="hide-186">🚫</span>
+</div>
+<div class="track" data-id="track-187">
+    <span class="favorite" data-id="fav-187">☆</span>
+    <label for="comment-187" class="track-label">Heavenly</label>
+    <textarea id="comment-187"></textarea>
+    <span class="hide-btn" data-id="hide-187">🚫</span>
+</div>
+<div class="track" data-id="track-188">
+    <span class="favorite" data-id="fav-188">☆</span>
+    <label for="comment-188" class="track-label">ヘングレ</label>
+    <textarea id="comment-188"></textarea>
+    <span class="hide-btn" data-id="hide-188">🚫</span>
+</div>
+<div class="track" data-id="track-189">
+    <span class="favorite" data-id="fav-189">☆</span>
+    <label for="comment-189" class="track-label">ほおづき</label>
+    <textarea id="comment-189"></textarea>
+    <span class="hide-btn" data-id="hide-189">🚫</span>
+</div>
+<div class="track" data-id="track-190">
+    <span class="favorite" data-id="fav-190">☆</span>
+    <label for="comment-190" class="track-label">hopeful</label>
+    <textarea id="comment-190"></textarea>
+    <span class="hide-btn" data-id="hide-190">🚫</span>
+</div>
+<div class="track" data-id="track-191">
+    <span class="favorite" data-id="fav-191">☆</span>
+    <label for="comment-191" class="track-label">ボクセル</label>
+    <textarea id="comment-191"></textarea>
+    <span class="hide-btn" data-id="hide-191">🚫</span>
+</div>
+<div class="track" data-id="track-192">
+    <span class="favorite" data-id="fav-192">☆</span>
+    <label for="comment-192" class="track-label">POSSESSION</label>
+    <textarea id="comment-192"></textarea>
+    <span class="hide-btn" data-id="hide-192">🚫</span>
+</div>
+<div class="track" data-id="track-193">
+    <span class="favorite" data-id="fav-193">☆</span>
+    <label for="comment-193" class="track-label">ポリブレ</label>
+    <textarea id="comment-193"></textarea>
+    <span class="hide-btn" data-id="hide-193">🚫</span>
+</div>
+<div class="track" data-id="track-194">
+    <span class="favorite" data-id="fav-194">☆</span>
+    <label for="comment-194" class="track-label">voltissimo</label>
+    <textarea id="comment-194"></textarea>
+    <span class="hide-btn" data-id="hide-194">🚫</span>
+</div>
+<div class="track" data-id="track-195">
+    <span class="favorite" data-id="fav-195">☆</span>
+    <label for="comment-195" class="track-label">white stream</label>
+    <textarea id="comment-195"></textarea>
+    <span class="hide-btn" data-id="hide-195">🚫</span>
+</div>
+<div class="track" data-id="track-196">
+    <span class="favorite" data-id="fav-196">☆</span>
+    <label for="comment-196" class="track-label">マクイル</label>
+    <textarea id="comment-196"></textarea>
+    <span class="hide-btn" data-id="hide-196">🚫</span>
+</div>
+<div class="track" data-id="track-197">
+    <span class="favorite" data-id="fav-197">☆</span>
+    <label for="comment-197" class="track-label">manticore</label>
+    <textarea id="comment-197"></textarea>
+    <span class="hide-btn" data-id="hide-197">🚫</span>
+</div>
+<div class="track" data-id="track-198">
+    <span class="favorite" data-id="fav-198">☆</span>
+    <label for="comment-198" class="track-label">midnight</label>
+    <textarea id="comment-198"></textarea>
+    <span class="hide-btn" data-id="hide-198">🚫</span>
+</div>
+<div class="track" data-id="track-199">
+    <span class="favorite" data-id="fav-199">☆</span>
+    <label for="comment-199" class="track-label">めうめうリミ</label>
+    <textarea id="comment-199"></textarea>
+    <span class="hide-btn" data-id="hide-199">🚫</span>
+</div>
+<div class="track" data-id="track-200">
+    <span class="favorite" data-id="fav-200">☆</span>
+    <label for="comment-200" class="track-label">メガララ緑</label>
+    <textarea id="comment-200"></textarea>
+    <span class="hide-btn" data-id="hide-200">🚫</span>
+</div>
+<div class="track" data-id="track-201">
+    <span class="favorite" data-id="fav-201">☆</span>
+    <label for="comment-201" class="track-label">メガララ黄色</label>
+    <textarea id="comment-201"></textarea>
+    <span class="hide-btn" data-id="hide-201">🚫</span>
+</div>
+<div class="track" data-id="track-202">
+    <span class="favorite" data-id="fav-202">☆</span>
+    <label for="comment-202" class="track-label">メガララ赤</label>
+    <textarea id="comment-202"></textarea>
+    <span class="hide-btn" data-id="hide-202">🚫</span>
+</div>
+<div class="track" data-id="track-203">
+    <span class="favorite" data-id="fav-203">☆</span>
+    <label for="comment-203" class="track-label">メタモル</label>
+    <textarea id="comment-203"></textarea>
+    <span class="hide-btn" data-id="hide-203">🚫</span>
+</div>
+<div class="track" data-id="track-204">
+    <span class="favorite" data-id="fav-204">☆</span>
+    <label for="comment-204" class="track-label">雪女</label>
+    <textarea id="comment-204"></textarea>
+    <span class="hide-btn" data-id="hide-204">🚫</span>
+</div>
+<div class="track" data-id="track-205">
+    <span class="favorite" data-id="fav-205">☆</span>
+    <label for="comment-205" class="track-label">ユニコーン</label>
+    <textarea id="comment-205"></textarea>
+    <span class="hide-btn" data-id="hide-205">🚫</span>
+</div>
+<div class="track" data-id="track-206">
+    <span class="favorite" data-id="fav-206">☆</span>
+    <label for="comment-206" class="track-label">ゆめ</label>
+    <textarea id="comment-206"></textarea>
+    <span class="hide-btn" data-id="hide-206">🚫</span>
+</div>
+<div class="track" data-id="track-207">
+    <span class="favorite" data-id="fav-207">☆</span>
+    <label for="comment-207" class="track-label">Riot</label>
+    <textarea id="comment-207"></textarea>
+    <span class="hide-btn" data-id="hide-207">🚫</span>
+</div>
+<div class="track" data-id="track-208">
+    <span class="favorite" data-id="fav-208">☆</span>
+    <label for="comment-208" class="track-label">RHYZING</label>
+    <textarea id="comment-208"></textarea>
+    <span class="hide-btn" data-id="hide-208">🚫</span>
+</div>
+<div class="track" data-id="track-209">
+    <span class="favorite" data-id="fav-209">☆</span>
+    <label for="comment-209" class="track-label">ラキラキ</label>
+    <textarea id="comment-209"></textarea>
+    <span class="hide-btn" data-id="hide-209">🚫</span>
+</div>
+<div class="track" data-id="track-210">
+    <span class="favorite" data-id="fav-210">☆</span>
+    <label for="comment-210" class="track-label">ラクリマシンフォ</label>
+    <textarea id="comment-210"></textarea>
+    <span class="hide-btn" data-id="hide-210">🚫</span>
+</div>
+<div class="track" data-id="track-211">
+    <span class="favorite" data-id="fav-211">☆</span>
+    <label for="comment-211" class="track-label">LAST OATH</label>
+    <textarea id="comment-211"></textarea>
+    <span class="hide-btn" data-id="hide-211">🚫</span>
+</div>
+<div class="track" data-id="track-212">
+    <span class="favorite" data-id="fav-212">☆</span>
+    <label for="comment-212" class="track-label">Last Dress</label>
+    <textarea id="comment-212"></textarea>
+    <span class="hide-btn" data-id="hide-212">🚫</span>
+</div>
+<div class="track" data-id="track-213">
+    <span class="favorite" data-id="fav-213">☆</span>
+    <label for="comment-213" class="track-label">Rampage rag</label>
+    <textarea id="comment-213"></textarea>
+    <span class="hide-btn" data-id="hide-213">🚫</span>
+</div>
+<div class="track" data-id="track-214">
+    <span class="favorite" data-id="fav-214">☆</span>
+    <label for="comment-214" class="track-label">Reach the sky</label>
+    <textarea id="comment-214"></textarea>
+    <span class="hide-btn" data-id="hide-214">🚫</span>
+</div>
+<div class="track" data-id="track-215">
+    <span class="favorite" data-id="fav-215">☆</span>
+    <label for="comment-215" class="track-label">リサリシア</label>
+    <textarea id="comment-215"></textarea>
+    <span class="hide-btn" data-id="hide-215">🚫</span>
+</div>
+<div class="track" data-id="track-216">
+    <span class="favorite" data-id="fav-216">☆</span>
+    <label for="comment-216" class="track-label">リント</label>
+    <textarea id="comment-216"></textarea>
+    <span class="hide-btn" data-id="hide-216">🚫</span>
+</div>
+<div class="track" data-id="track-217">
+    <span class="favorite" data-id="fav-217">☆</span>
+    <label for="comment-217" class="track-label">リリーゼ</label>
+    <textarea id="comment-217"></textarea>
+    <span class="hide-btn" data-id="hide-217">🚫</span>
+</div>
+<div class="track" data-id="track-218">
+    <span class="favorite" data-id="fav-218">☆</span>
+    <label for="comment-218" class="track-label">リンカネ</label>
+    <textarea id="comment-218"></textarea>
+    <span class="hide-btn" data-id="hide-218">🚫</span>
+</div>
+<div class="track" data-id="track-219">
+    <span class="favorite" data-id="fav-219">☆</span>
+    <label for="comment-219" class="track-label">霖が哭く</label>
+    <textarea id="comment-219"></textarea>
+    <span class="hide-btn" data-id="hide-219">🚫</span>
+</div>
+<div class="track" data-id="track-220">
+    <span class="favorite" data-id="fav-220">☆</span>
+    <label for="comment-220" class="track-label">RAISE</label>
+    <textarea id="comment-220"></textarea>
+    <span class="hide-btn" data-id="hide-220">🚫</span>
+</div>
+<div class="track" data-id="track-221">
+    <span class="favorite" data-id="fav-221">☆</span>
+    <label for="comment-221" class="track-label">Red goose</label>
+    <textarea id="comment-221"></textarea>
+    <span class="hide-btn" data-id="hide-221">🚫</span>
+</div>
+<div class="track" data-id="track-222">
+    <span class="favorite" data-id="fav-222">☆</span>
+    <label for="comment-222" class="track-label">Roll the Dice</label>
+    <textarea id="comment-222"></textarea>
+    <span class="hide-btn" data-id="hide-222">🚫</span>
+</div>
+<div class="track" data-id="track-223">
+    <span class="favorite" data-id="fav-223">☆</span>
+    <label for="comment-223" class="track-label">Lost Dream</label>
+    <textarea id="comment-223"></textarea>
+    <span class="hide-btn" data-id="hide-223">🚫</span>
+</div>
+<div class="track" data-id="track-224">
+    <span class="favorite" data-id="fav-224">☆</span>
+    <label for="comment-224" class="track-label">Rock ju</label>
+    <textarea id="comment-224"></textarea>
+    <span class="hide-btn" data-id="hide-224">🚫</span>
+</div>
+<div class="track" data-id="track-225">
+    <span class="favorite" data-id="fav-225">☆</span>
+    <label for="comment-225" class="track-label">ロマンシング</label>
+    <textarea id="comment-225"></textarea>
+    <span class="hide-btn" data-id="hide-225">🚫</span>
+</div>
+<div class="track" data-id="track-226">
+    <span class="favorite" data-id="fav-226">☆</span>
+    <label for="comment-226" class="track-label">wowie</label>
+    <textarea id="comment-226"></textarea>
+    <span class="hide-btn" data-id="hide-226">🚫</span>
+</div>
+<div class="track" data-id="track-227">
+    <span class="favorite" data-id="fav-227">☆</span>
+    <label for="comment-227" class="track-label">海神</label>
+    <textarea id="comment-227"></textarea>
+    <span class="hide-btn" data-id="hide-227">🚫</span>
+</div>
+<div class="track" data-id="track-228">
+    <span class="favorite" data-id="fav-228">☆</span>
+    <label for="comment-228" class="track-label">海神シンフォ</label>
+    <textarea id="comment-228"></textarea>
+    <span class="hide-btn" data-id="hide-228">🚫</span>
+</div>
+<div class="track" data-id="track-229">
+    <span class="favorite" data-id="fav-229">☆</span>
+    <label for="comment-229" class="track-label">WONDER WALKER</label>
+    <textarea id="comment-229"></textarea>
+    <span class="hide-btn" data-id="hide-229">🚫</span>
+</div>
+<div class="track" data-id="track-230">
+    <span class="favorite" data-id="fav-230">☆</span>
+    <label for="comment-230" class="track-label">One more reason</label>
+    <textarea id="comment-230"></textarea>
+    <span class="hide-btn" data-id="hide-230">🚫</span>
+</div>
+
+    <div id="restore-btn">🚪 非表示をすべて表示する</div>
+
+    <script>
+        // コメント保存と復元
+        document.querySelectorAll("textarea").forEach(textarea => {
+            const id = textarea.id;
+            textarea.value = localStorage.getItem(id) || "";
+            textarea.addEventListener("input", () => {
+                localStorage.setItem(id, textarea.value);
+                applyFilter();
+            });
+        });
+
+        // お気に入り保存と復元
+        document.querySelectorAll(".favorite").forEach(star => {
+            const id = star.dataset.id;
+            const isFav = localStorage.getItem(id) === "true";
+            if (isFav) {
+                star.classList.add("active");
+                star.textContent = "★";
+            }
+            star.addEventListener("click", () => {
+                const nowFav = star.classList.toggle("active");
+                star.textContent = nowFav ? "★" : "☆";
+                localStorage.setItem(id, nowFav);
+                applyFilter();
+            });
+        });
+
+        // 数値 + お気に入り + 非表示 フィルター
+        const filterInput = document.getElementById("threshold");
+        const favOnlyCheckbox = document.getElementById("favOnly");
+        filterInput.addEventListener("input", applyFilter);
+        favOnlyCheckbox.addEventListener("change", applyFilter);
+
+        function applyFilter() {
+            const threshold = parseFloat(filterInput.value);
+            const favOnly = favOnlyCheckbox.checked;
+
+            document.querySelectorAll(".track").forEach(track => {
+                const textarea = track.querySelector("textarea");
+                const value = parseFloat(textarea.value);
+                const hidden = localStorage.getItem("hidden-" + track.dataset.id) === "true";
+                const fav = track.querySelector(".favorite").classList.contains("active");
+
+                let show = true;
+
+                if (hidden) {
+                    show = false;
+                } else if (!isNaN(threshold)) {
+                    if (isNaN(value) || value > threshold) {
+                        show = false;
+                    }
+                }
+
+                if (favOnly && !fav) {
+                    show = false;
+                }
+
+                track.style.display = show ? "flex" : "none";
+            });
+        }
+
+        // 非表示処理
+        document.querySelectorAll(".hide-btn").forEach(button => {
+            button.addEventListener("click", () => {
+                if (confirm("この曲を非表示にしますか？")) {
+                    const trackDiv = button.closest(".track");
+                    localStorage.setItem("hidden-" + trackDiv.dataset.id, "true");
+                    trackDiv.style.display = "none";
+                }
+            });
+        });
+
+        // 非表示解除ボタン
+        document.getElementById("restore-btn").addEventListener("click", () => {
+            document.querySelectorAll(".track").forEach(track => {
+                localStorage.removeItem("hidden-" + track.dataset.id);
+                track.style.display = "flex";
+            });
+        });
+
+        applyFilter();
+    </script>
+</body>
+</html>
